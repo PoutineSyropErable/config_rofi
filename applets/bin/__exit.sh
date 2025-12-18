@@ -5,8 +5,11 @@ if pgrep -x "Hyprland" >/dev/null; then
 	# Hyprland is running, exit Hyprland
 	#notify-send "Hyperland"
 	echo "Hyperland"
-	uwsm stop
-	hyprctl dispatch exit
+	loginctl kill-session "$XDG_SESSION_ID"
+	if false; then
+		uwsm stop # cause crash
+		hyprctl dispatch exit
+	fi
 
 elif pgrep -x "i3" >/dev/null || pgrep -x "i3-with-shmlog" >/dev/null; then
 	echo "i3"
